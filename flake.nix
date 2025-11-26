@@ -2,7 +2,7 @@
   description = "Pixie's Templates";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,7 +55,7 @@
       nodejs = {
         path = ./nodejs;
         description = ''
-          A template for Node.js projects using Pnpm.
+          A template for Node.js projects using Pnpm, ESLint, and Prettier.
         '';
       };
     };
