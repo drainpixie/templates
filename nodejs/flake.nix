@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     hooks.url = "github:cachix/git-hooks.nix";
   };
 
@@ -27,13 +27,29 @@
           inherit system;
         });
   in {
-    checks = forAllSystems ({system, ...}: {
+    checks = forAllSystems ({
+      system,
+      pkgs,
+      ...
+    }: {
       pre-commit-check = hooks.lib.${system}.run {
         src = ./.;
+        package = pkgs.prek;
         hooks = {
           alejandra.enable = true;
-          prettier.enable = true;
           convco.enable = true;
+
+          eslint = {
+            enable = true;
+            entry = "pnpm eslint";
+            files = "\\.(ts|js|tsx|jsx)$";
+          };
+
+          prettier = {
+            enable = true;
+            excludes = ["flake.lock"];
+          };
+
           statix = {
             enable = true;
             settings.ignore = ["/.direnv"];
