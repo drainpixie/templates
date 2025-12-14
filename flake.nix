@@ -58,6 +58,13 @@
           A template for Node.js projects using Pnpm, ESLint, and Prettier.
         '';
       };
+
+      rust = {
+        path = ./rust;
+        description = ''
+          A template for Rust projects.
+        '';
+      };
     };
   };
 }
